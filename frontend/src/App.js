@@ -14,20 +14,16 @@ class App extends Component {
     currentBlock: null,
   }
   componentDidMount() {
-    web3.eth.getBlockNumber().then(res => {
-      this.setState({
-        currentBlockNumber: res,
-        loaded: true,
-      })
-      return res
-    }).then(latestBlock => {
-      web3.eth.getBlock(latestBlock).then(res => {
-        console.log(res)
-        this.setState({
-          currentBlock: res
+    web3.eth.getBlockNumber()
+      .then(latestBlock => {
+        web3.eth.getBlock(latestBlock).then(res => {
+          this.setState({
+            currentBlockNumber: latestBlock,
+            currentBlock: res,
+            loaded: true,
+          })
         })
       })
-    })
   }
   render() {
     if (!web3.givenProvider) {
