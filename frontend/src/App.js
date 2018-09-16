@@ -13,10 +13,14 @@ class App extends Component {
     loaded: false,
     currentBlock: null,
   }
+
+  async getBlockData(blockNumber) {
+    return await web3.eth.getBlock(blockNumber)
+  }
   componentDidMount() {
     web3.eth.getBlockNumber()
       .then(latestBlock => {
-        web3.eth.getBlock(latestBlock).then(res => {
+        this.getBlockData(latestBlock).then(res => {
           this.setState({
             currentBlockNumber: latestBlock,
             currentBlock: res,
