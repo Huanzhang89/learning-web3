@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import Web3 from 'web3'
 import Loader from 'react-loader'
+
+import BlockItem from './components/BlockItem'
 
 let web3 = new Web3(Web3.givenProvider);
 
@@ -43,6 +44,7 @@ class App extends Component {
     return (
       <div className="App">
         <Loader loaded={this.state.loaded} >
+          <BlockItem {...this.state.currentBlock} />
           <div>{JSON.stringify(this.state.currentBlock)}</div>
         </Loader>
         {/* {console.log(currentBlock)} */}
